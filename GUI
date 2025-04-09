@@ -65,6 +65,10 @@ game:GetService('Players').LocalPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
 end)
 
+LocalPlayer.CharacterAdded:Connect(function()
+  loadstring(game:HttpGet("https://raw.githubusercontent.com/jmxploits/MTI/refs/heads/main/GUI"))()loadstring(game:HttpGet("https://raw.githubusercontent.com/jmxploits/MTI/refs/heads/main/GUI"))()
+end)
+
 local safepart = Instance.new("Part")
 safepart.Parent = workspace
 safepart.Anchored = true
@@ -83,12 +87,12 @@ local function AutoGrabChests()
         if count >= 1 then 
           hrp.CFrame = v.Parent.CFrame
            task.wait(0.3)
-          fireproximityprompt(v)
-          debounce = true
-          task.wait(0.2)
-          debounce = false
+           fireproximityprompt(v)
+           debounce = true
+           task.wait(0.2)
+           debounce = false
         else
-          hrp.CFrame = safepart.CFrame
+           hrp.CFrame = safepart.CFrame
         end
       end
     end
