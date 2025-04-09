@@ -80,14 +80,15 @@ local function AutoGrabChests()
       if v:IsA("ProximityPrompt") and debounce ~= true then
         local count = tonumber(#chests:GetChildren())
         if IsOn ~= true then break end
-        if count >= 1 then 
+        if count >= 1 and v.Parent.CFrame.Y <= 40 then
+          if count == 0 then print(count) end
           hrp.CFrame = v.Parent.CFrame
            task.wait(0.3)
            fireproximityprompt(v)
            debounce = true
            task.wait(0.2)
            debounce = false
-        else
+        elseif count <= 1 or count == 0 then 
            hrp.CFrame = safepart.CFrame
         end
       end
