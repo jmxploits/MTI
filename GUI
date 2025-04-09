@@ -65,20 +65,6 @@ game:GetService('Players').LocalPlayer.Idled:Connect(function()
     VirtualUser:ClickButton2(Vector2.new())
 end)
 
-LocalPlayer.CharacterAdded:Connect(function()
-  getgenv().IsOn = false
-  getgenv().AutoDeleteBloodAndOil = false
-  getgenv().AutoOpen = false
-  local debounce = false
-  local cooldown = false
-  loadstring(game:HttpGet("https://raw.githubusercontent.com/jmxploits/MTI/refs/heads/main/GUI"))()loadstring(game:HttpGet("https://raw.githubusercontent.com/jmxploits/MTI/refs/heads/main/GUI"))()
-  getgenv().IsOn = true
-  getgenv().AutoDeleteBloodAndOil = true  
-  getgenv().AutoOpen = true
-  local debounce = false
-  local cooldown = false
-end)
-
 local safepart = Instance.new("Part")
 safepart.Parent = workspace
 safepart.Anchored = true
