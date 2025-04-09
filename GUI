@@ -1,0 +1,139 @@
+local ReGui = loadstring(game:HttpGet('https://raw.githubusercontent.com/depthso/Dear-ReGui/refs/heads/main/ReGui.lua'))()
+  local PrefabsId = `rbxassetid://{ReGui.PrefabsId}`
+  
+  --// Externally import the Prefabs asset
+  ReGui:Init({
+      Prefabs = game:GetService("InsertService"):LoadLocalAsset(PrefabsId)
+  })
+  
+  ReGui:DefineTheme("Cherry", {
+      TitleAlign = Enum.TextXAlignment.Center,
+      TextDisabled = Color3.fromRGB(120, 100, 120),
+      Text = Color3.fromRGB(200, 180, 200),
+      
+      FrameBg = Color3.fromRGB(25, 20, 25),
+      FrameBgTransparency = 0.4,
+      FrameBgActive = Color3.fromRGB(120, 100, 120),
+      FrameBgTransparencyActive = 0.4,
+      
+      CheckMark = Color3.fromRGB(150, 100, 150),
+      SliderGrab = Color3.fromRGB(150, 100, 150),
+      ButtonsBg = Color3.fromRGB(150, 100, 150),
+      CollapsingHeaderBg = Color3.fromRGB(150, 100, 150),
+      CollapsingHeaderText = Color3.fromRGB(200, 180, 200),
+      RadioButtonHoveredBg = Color3.fromRGB(150, 100, 150),
+      
+      WindowBg = Color3.fromRGB(35, 30, 35),
+      TitleBarBg = Color3.fromRGB(35, 30, 35),
+      TitleBarBgActive = Color3.fromRGB(50, 45, 50),
+      
+      Border = Color3.fromRGB(50, 45, 50),
+      ResizeGrab = Color3.fromRGB(50, 45, 50),
+      RegionBgTransparency = 1,
+  })
+  
+  -- Window
+  
+  local Window = ReGui:Window({
+      Title = "Multiversal Trollge Insanity",
+      Theme = "Cherry",
+      Size = UDim2.fromOffset(300, 200)
+  })
+
+-- Locals
+local chests = workspace:WaitForChild("chests")
+local char = game.Players.LocalPlayer.Character
+local VirtualUser = game:GetService('VirtualUser')
+local hrp = char.HumanoidRootPart
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Backpack = LocalPlayer.Backpack
+local TCS = game:GetService("TextChatService")
+local TextChannel = TCS.TextChannels:FindFirstChild("RBXGeneral")
+local VirtualUser = game:GetService('VirtualUser')
+ 
+
+-- Settings
+getgenv().IsOn = false
+getgenv().AutoDeleteBloodAndOil = false
+getgenv().AutoOpen = false
+local debounce = false
+local cooldown = false
+local count = #chests:GetChildren()
+local OpenList = {"Chest", "Dark Chest", "Light Chest", "Dimeneional Box"}
+
+game:GetService('Players').LocalPlayer.Idled:Connect(function()
+    VirtualUser:CaptureController()
+    VirtualUser:ClickButton2(Vector2.new())
+end)
+
+local function AutoGrabChests()
+  while IsOn == true and task.wait() do
+    for _, v in pairs(chests:GetDescendants()) do
+      if v:IsA("ProximityPrompt") and debounce ~= true then
+        if IsOn ~= true then break end
+        if count <= 1 then hrp.CFrame = CFrame.new(0, 0, 0) end
+        hrp.CFrame = v.Parent.CFrame
+        task.wait(0.3)
+        fireproximityprompt(v)
+        debounce = true
+        task.wait(0.2)
+        debounce = false
+      end
+    end
+  end
+end
+
+local function AutoOpenChests()
+  while AutoOpen == true do
+    if AutoOpen ~= true then break end
+    for _, v in pairs(Backpack:GetChildren())
+      if v.Name == OpenList then
+        local hum = char:FindFirstChildWhichIsA("Humanoid")
+        hum:EquipTool(v)
+        task.wait(0.1)
+        v:Activate()
+    end
+  end
+end
+  
+local function AutoDelete()
+  while task.wait() and AutoDeleteBloodAndOil == true do
+    for _, v in pairs(Backpack:GetChildren()) do
+      if v.Name == "Oil Cup" or v.Name == "Blood Cup" or v.Name == "Light Cup" and v.Name == "Dark Cup" then
+        v:Destroy()
+      end
+    end
+  end
+end
+
+Window:Checkbox({
+      Value = false,
+      Label = "Auto Grab Chests",
+      Callback = function(self, Value)
+        IsOn = Value
+        AutoGrabChests()
+      end
+  })
+
+Window:Checkbox({
+      Value = false,
+      Label = "Auto Open Chests",
+      Callback = function(self, Value)
+        AutoOpen = Value
+        AutoOpenChests()
+      end
+  })
+
+Window:Checkbox({
+      Value = false,
+      Label = "Auto Delete Commons",
+      Callback = function(self, Value)
+          AutoDeleteBloodAndOil = Value
+          AutoDelete()
+      end
+  })
+
+Window:Label({
+  Text = "Anti Afk Loaded!"
+})
