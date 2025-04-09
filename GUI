@@ -59,48 +59,53 @@ getgenv().AutoDeleteBloodAndOil = false
 getgenv().AutoOpen = false
 local debounce = false
 local cooldown = false
-local count = #chests:GetChildren()
-local OpenList = {"Chest", "Dark Chest", "Light Chest", "Dimeneional Box"}
 
 game:GetService('Players').LocalPlayer.Idled:Connect(function()
     VirtualUser:CaptureController()
     VirtualUser:ClickButton2(Vector2.new())
 end)
 
+local safepart = Instance.new("Part")
+safepart.Parent = workspace
+safepart.Anchored = true
+safepart.CFrame = CFrame.new(2500, 0, 2500)
+safepart.Transparency = 0.5
+safepart.Size = Vector3.new(100, 0 ,100)
+
+
+
 local function AutoGrabChests()
   while IsOn == true and task.wait() do
     for _, v in pairs(chests:GetDescendants()) do
       if v:IsA("ProximityPrompt") and debounce ~= true then
+        local count = tonumber(#chests:GetChildren())
         if IsOn ~= true then break end
-        if count <= 1 then hrp.CFrame = CFrame.new(0, 0, 0) end
-        hrp.CFrame = v.Parent.CFrame
-        task.wait(0.3)
-        fireproximityprompt(v)
-        debounce = true
-        task.wait(0.2)
-        debounce = false
+        if count >= 1 then 
+          hrp.CFrame = v.Parent.CFrame
+           task.wait(0.3)
+          fireproximityprompt(v)
+          debounce = true
+          task.wait(0.2)
+          debounce = false
+        else
+          hrp.CFrame = safepart.CFrame
+        end
       end
     end
   end
 end
 
 local function AutoOpenChests()
-  while AutoOpen == true do
-    if AutoOpen ~= true then break end
-    for _, v in pairs(Backpack:GetChildren())
-      if v.Name == OpenList then
-        local hum = char:FindFirstChildWhichIsA("Humanoid")
-        hum:EquipTool(v)
-        task.wait(0.1)
-        v:Activate()
-    end
+  while AutoOpen == true and task.wait() do
+    task.wait(30)
+    TextChannel:SendAsync(";openchests")
   end
 end
   
 local function AutoDelete()
   while task.wait() and AutoDeleteBloodAndOil == true do
     for _, v in pairs(Backpack:GetChildren()) do
-      if v.Name == "Oil Cup" or v.Name == "Blood Cup" or v.Name == "Light Cup" and v.Name == "Dark Cup" then
+      if v.Name == "Oil Cup" or v.Name == "Blood Cup" or v.Name == "Light Cup" or v.Name == "Dark Cup" then
         v:Destroy()
       end
     end
