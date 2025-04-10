@@ -136,9 +136,11 @@ end
   
 local function AutoDelete()
   while task.wait() and AutoDeleteBloodAndOil == true do
-    for _, v in pairs(Backpack:GetChildren()) do
-      if v.Name == deletelist then
-        v:Destroy()
+    for _, v1 in pairs(Backpack:GetChildren()) do
+      for _, v2 in pairs(deletelist) do
+        if v1.Name == v2 then
+          v2:Destroy()
+        end
       end
     end
   end
