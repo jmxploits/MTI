@@ -59,6 +59,36 @@ getgenv().AutoDeleteBloodAndOil = false
 getgenv().AutoOpen = false
 local debounce = false
 local cooldown = false
+local deletelist = {
+  "Oil Cup",
+  "Blood Cup",
+  "Acid Cup",
+  "Light Cup",
+  "Paladins Helmet",
+  "Egg",
+  "Toxic",
+  "Unknown Cup",
+  "Skibidi Essence",
+  "Angelic Cup",
+  "Legendary Cup",
+  "True Oil Cup",
+  "True Blood Cup",
+  "Golden Cup",
+  "Shadow Cup",
+  "Drip Cup",
+  "Knowledge Cup",
+  "Darkness Cup",
+  "Evil Cup",
+  "Determination",
+  "Integrity Soul",
+  "Justice Soul",
+  "World Eater Cup",
+  "Mimic Cup",
+  "Entity Cup",
+  "Eye of Seraphim",
+  "Seraphim Soul",
+  "Universe Cup",
+}
 
 game:GetService('Players').LocalPlayer.Idled:Connect(function()
     VirtualUser:CaptureController()
@@ -71,6 +101,7 @@ safepart.Anchored = true
 safepart.CFrame = CFrame.new(2500, 0, 2500)
 safepart.Transparency = 0.5
 safepart.Size = Vector3.new(100, 0 ,100)
+
 
 
 
@@ -106,7 +137,7 @@ end
 local function AutoDelete()
   while task.wait() and AutoDeleteBloodAndOil == true do
     for _, v in pairs(Backpack:GetChildren()) do
-      if v.Name == "Oil Cup" or v.Name == "Blood Cup" or v.Name == "Light Cup" or v.Name == "Dark Cup" then
+      if v.Name == deletelist then
         v:Destroy()
       end
     end
