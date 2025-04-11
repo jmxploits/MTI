@@ -135,12 +135,10 @@ local function AutoOpenChests()
 end
   
 local function AutoDelete()
-  while task.wait() and AutoDeleteBloodAndOil == true do
-    for _, v1 in pairs(Backpack:GetChildren()) do
-      for _, v2 in pairs(deletelist) do
-        if v1.Name == v2 then
-          v2:Destroy()
-        end
+  while task.wait(0.5) and AutoDeleteBloodAndOil == true do
+    for _, item in ipairs(Backpack:GetDescendants()) do
+      if deletelist[item.Name] then
+        item:Destroy()
       end
     end
   end
