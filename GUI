@@ -136,6 +136,7 @@ end
   
 local function AutoDelete()
   while task.wait(0.5) and AutoDeleteBloodAndOil == true do
+print("fat")
     for _, item in ipairs(Backpack:GetDescendants()) do
       if deletelist[item.Name] then
         item:Destroy()
