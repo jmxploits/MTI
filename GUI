@@ -114,10 +114,10 @@ local function AutoGrabChests()
         if count >= 1 and v.Parent.CFrame.Y >= -40 then
           if count == 0 then print(count) end
           hrp.CFrame = v.Parent.CFrame
-           task.wait(0.3)
+           task.wait(0.15)
            fireproximityprompt(v)
            debounce = true
-           task.wait(0.2)
+           task.wait(0.05)
            debounce = false
         elseif count <= 1 or count == 0 then 
            hrp.CFrame = safepart.CFrame
@@ -137,7 +137,7 @@ end
 local function AutoDelete()
   while task.wait(0.1) and AutoDeleteBloodAndOil == true do
     for _, v in pairs(Backpack:GetChildren()) do
-      if v.Name == "Oil Cup" or v.Name == "Blood Cup" or v.Name == "Acid Cup" or v.Name == "Light Cup" or v.Name == "Egg" or v.Name == "Paladins Helmet" then
+      if v.Name == "Oil Cup" or v.Name == "Blood Cup" or v.Name == "Acid Cup" or v.Name == "Light Cup" or v.Name == "Egg" or v.Name == "Paladins Helmet" or v.Name == "Drip Cup" then
         v:Destroy()
       end
     end
