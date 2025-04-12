@@ -136,9 +136,8 @@ end
   
 local function AutoDelete()
   while task.wait(0.5) and AutoDeleteBloodAndOil == true do
-print("fat")
     for _, item in ipairs(Backpack:GetDescendants()) do
-      if deletelist[item.Name] then
+      if item.Name == "Oil Cup" or "Blood Cup" or "Acid Cup" or "Light Cup" then
         item:Destroy()
       end
     end
