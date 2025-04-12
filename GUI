@@ -135,10 +135,10 @@ local function AutoOpenChests()
 end
   
 local function AutoDelete()
-  while task.wait(0.5) and AutoDeleteBloodAndOil == true do
-    for _, item in ipairs(Backpack:GetDescendants()) do
-      if item.Name == "Oil Cup" or item.Name == "Blood Cup" or item.Name == "Acid Cup" or item.Name == "Light Cup" or item.Name == "Egg" or item.Name == "Paladins Helmet" then
-        item:Destroy()
+  while task.wait(0.1) and AutoDeleteBloodAndOil == true do
+    for _, v in pairs(Backpack:GetChildren()) do
+      if v.Name == "Oil Cup" or v.Name == "Blood Cup" or v.Name == "Acid Cup" or v.Name == "Light Cup" or v.Name == "Egg" or v.Name == "Paladins Helmet" then
+        v:Destroy()
       end
     end
   end
