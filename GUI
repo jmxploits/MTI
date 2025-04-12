@@ -137,7 +137,7 @@ end
 local function AutoDelete()
   while task.wait(0.5) and AutoDeleteBloodAndOil == true do
     for _, item in ipairs(Backpack:GetDescendants()) do
-      if item.Name == "Oil Cup" or "Blood Cup" or "Acid Cup" or "Light Cup" then
+      if item.Name == "Oil Cup" or item.Name == "Blood Cup" or item.Name == "Acid Cup" or item.Name == "Light Cup" or item.Name == "Egg" or item.Name == "Paladins Helmet" then
         item:Destroy()
       end
     end
