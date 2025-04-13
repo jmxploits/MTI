@@ -83,13 +83,18 @@ local function AutoGrabChests()
         chests = v1.Parent
         for _, v2 in pairs(chests:GetDescendants()) do
           if v2:IsA("ProximityPrompt") and debounce ~= true then
-            debounce = true
             if IsOn ~= true then break; end
-            hrp.CFrame = v2.Parent.CFrame
-            task.wait(0.25)
-            fireproximityprompt(v2)
-            task.wait(0.15)
-            debounce = false
+            local count = tonumber(#v2:GetChildren())
+              if count >= 1 and v2.Parent.CFrame.Y >= -40 then
+                hrp.CFrame = v2.Parent.CFrame
+                task.wait(0.15)
+                fireproximityprompt(v2)
+                debounce = true
+                task.wait(0.05)
+                debounce = false
+              elseif count <= 1 then
+                hrp.CFrame = safepart.CFrame
+            end
           end
         end
       end
