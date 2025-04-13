@@ -80,7 +80,7 @@ local function AutoGrabChests()
   while IsOn == true do
     for _, v1 in pairs(workspace:GetDescendants()) do
       local count = tonumber(#v1:GetChildren())
-      if count >= 1 then
+      if count >= 0 then
         if v1:IsA("Part") and v1.Name == "Chest_p" then
           chests = v1.Parent
           for _, v2 in pairs(chests:GetDescendants()) do
@@ -93,7 +93,7 @@ local function AutoGrabChests()
                 debounce = true
                 task.wait(0.05)
                 debounce = false
-      elseif count <= 1 then
+      elseif count <= 0 then
         task.wait(0.5)
               end
             end
