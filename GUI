@@ -84,7 +84,7 @@ local function AutoGrabChests()
         if v1:IsA("Part") and v1.Name == "Chest_p" then
           chests = v1.Parent
           for _, v2 in pairs(chests:GetDescendants()) do
-            if v2:IsA("ProximityPrompt") and debounce ~= true then
+            if v2:IsA("ProximityPrompt") and debounce ~= true and v2 ~= nil then
               if IsOn ~= true then break; end
               if v2.Parent ~= nil then
                 hrp.CFrame = v2.Parent.CFrame
