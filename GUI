@@ -80,9 +80,9 @@ local function AutoGrabChests()
   while IsOn == true do
     for _, v1 in pairs(workspace:GetDescendants()) do
       local count = tonumber(#v1:GetChildren())
-      if count >= 0 then
         if v1:IsA("Part") and v1.Name == "Chest_p" then
           chests = v1.Parent
+          if count > 0 then 
           for _, v2 in pairs(chests:GetDescendants()) do
             if v2:IsA("ProximityPrompt") and debounce ~= true and v2 ~= nil then
               if IsOn ~= true then break; end
