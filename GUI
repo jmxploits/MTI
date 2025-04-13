@@ -77,7 +77,7 @@ safepart.Size = Vector3.new(100, 0 ,100)
 
 
 local function AutoGrabChests()
-  while IsOn == true and task.wait() do
+  while IsOn == true do
     for _, v1 in pairs(workspace:GetDescendants()) do
       local count = tonumber(#v1:GetChildren())
       if count >= 1 then
@@ -93,9 +93,8 @@ local function AutoGrabChests()
                 debounce = true
                 task.wait(0.05)
                 debounce = false
-              elseif count <= 1 then
-                task.wait()
-                hrp.CFrame = safepart.CFrame
+      elseif count <= 1 then
+        task.wait(0.5)
               end
             end
           end
