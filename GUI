@@ -86,7 +86,7 @@ local function AutoGrabChests()
           for _, v2 in pairs(chests:GetDescendants()) do
             if v2:IsA("ProximityPrompt") and debounce ~= true then
               if IsOn ~= true then break; end
-              if v2.Parent.CFrame.Y >= -40 then
+              if v2.Parent.CFrame.Y >= -40 and v2.Parent.CFrame ~= nil then
                 hrp.CFrame = v2.Parent.CFrame
                 task.wait(0.15)
                 fireproximityprompt(v2)
