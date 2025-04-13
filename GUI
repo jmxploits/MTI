@@ -115,8 +115,9 @@ local function AutoGrabChests()
             debounce = true
             if IsOn ~= true then break; end
             hrp.CFrame = v2.Parent.CFrame
+            task.wait(0.15)
             fireproximityprompt(v2)
-            task.wait(0.2)
+            task.wait(0.15)
             debounce = false
           end
         end
