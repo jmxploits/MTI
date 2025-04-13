@@ -59,36 +59,7 @@ getgenv().AutoDeleteBloodAndOil = false
 getgenv().AutoOpen = false
 local debounce = false
 local cooldown = false
-local deletelist = {
-  "Oil Cup",
-  "Blood Cup",
-  "Acid Cup",
-  "Light Cup",
-  "Paladins Helmet",
-  "Egg",
-  "Toxic",
-  "Unknown Cup",
-  "Skibidi Essence",
-  "Angelic Cup",
-  "Legendary Cup",
-  "True Oil Cup",
-  "True Blood Cup",
-  "Golden Cup",
-  "Shadow Cup",
-  "Drip Cup",
-  "Knowledge Cup",
-  "Darkness Cup",
-  "Evil Cup",
-  "Determination",
-  "Integrity Soul",
-  "Justice Soul",
-  "World Eater Cup",
-  "Mimic Cup",
-  "Entity Cup",
-  "Eye of Seraphim",
-  "Seraphim Soul",
-  "Universe Cup",
-}
+
 
 game:GetService('Players').LocalPlayer.Idled:Connect(function()
     VirtualUser:CaptureController()
@@ -115,7 +86,7 @@ local function AutoGrabChests()
             debounce = true
             if IsOn ~= true then break; end
             hrp.CFrame = v2.Parent.CFrame
-            task.wait(0.15)
+            task.wait(0.25)
             fireproximityprompt(v2)
             task.wait(0.15)
             debounce = false
