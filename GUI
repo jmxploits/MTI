@@ -41,7 +41,7 @@ local ReGui = loadstring(game:HttpGet('https://raw.githubusercontent.com/depthso
   })
 
 -- Locals
-local chests = workspace:WaitForChild("chests")
+local chests
 local char = game.Players.LocalPlayer.Character
 local VirtualUser = game:GetService('VirtualUser')
 local hrp = char.HumanoidRootPart
@@ -106,21 +106,19 @@ safepart.Size = Vector3.new(100, 0 ,100)
 
 
 local function AutoGrabChests()
-  while IsOn == true and task.wait() do
-    for _, v in pairs(chests:GetDescendants()) do
-      if v:IsA("ProximityPrompt") and debounce ~= true then
-        local count = tonumber(#chests:GetChildren())
-        if IsOn ~= true then break end
-        if count >= 1 and v.Parent.CFrame.Y >= -40 then
-          if count == 0 then print(count) end
-          hrp.CFrame = v.Parent.CFrame
-           task.wait(0.15)
-           fireproximityprompt(v)
-           debounce = true
-           task.wait(0.05)
-           debounce = false
-        elseif count <= 1 or count == 0 then 
-           hrp.CFrame = safepart.CFrame
+  while IsOn == true do
+    for _, v1 in pairs(workspace:GetDescendants()) do
+      if v1.Name == "Chest_p" then
+        chests = v1.Parent
+        for _, v2 in pairs(chests:GetDescendants()) do
+          if v2:IsA("ProximityPrompt") and debounce ~= true then
+            debounce = true
+            if IsOn ~= true then break; end
+            hrp.CFrame = v2.Parent.CFrame
+            fireproximityprompt(v2)
+            task.wait(0.2)
+            debounce = false
+          end
         end
       end
     end
